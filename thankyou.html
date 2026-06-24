@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKULDA — VERIFIED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: #050508;
+            color: #E0E0E0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 25px 40px;
+            z-index: 1000;
+        }
+
+        .email-link {
+            color: #8A94A6;
+            text-decoration: none;
+            font-size: 11px;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 0.15em;
+            transition: color 0.3s;
+        }
+        .email-link:hover { color: #fff; }
+
+        section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .marker {
+            color: #00f3ff;
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-shadow: 0 0 10px rgba(0,243,255,0.5);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .brand-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 300;
+            color: #FFFFFF;
+            letter-spacing: 0.3em;
+            margin-bottom: 32px;
+            text-indent: 0.3em;
+            text-align: center;
+        }
+
+        .thankyou-box {
+            width: 100%;
+            max-width: 440px;
+            background-color: rgba(9, 8, 16, 0.4);
+            border: 1px solid rgba(138, 148, 166, 0.1);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .thankyou-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1.5px;
+            background: linear-gradient(to right, transparent, #00f3ff, transparent);
+            box-shadow: 0 0 10px rgba(0,243,255,0.6);
+        }
+
+        .main-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 22px;
+            color: #FFFFFF;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .sub-message {
+            font-size: 13px;
+            color: #8A94A6;
+            line-height: 1.75;
+            letter-spacing: 0.02em;
+        }
+
+        .gliphs {
+            margin-top: 32px;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.5em;
+            text-indent: 0.5em;
+            opacity: 0.6;
+        }
+
+        .back-link {
+            margin-top: 28px;
+            font-size: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 0.18em;
+            color: #38324e;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            display: block;
+        }
+        .back-link:hover { color: #8A94A6; }
+
+        .footer-rune {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            letter-spacing: 12px;
+            color: rgba(255,255,255,0.03);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="mailto:hello@skulda.com.br" class="email-link">hello@skulda.com.br</a>
+    </header>
+
+    <section>
+        <div class="marker">◈</div>
+        <h1 class="brand-title">SKULDA</h1>
+        
+        <div class="thankyou-box">
+            <p class="main-message" data-key="title">Seu e-mail foi gravado.</p>
+            <p class="sub-message" data-key="body">
+                O seu vetor de destino foi registrado na lista de espera principal. Um e-mail de confirmação mística está a caminho da sua caixa de entrada. O silêncio está prestes a se romper.
+            </p>
+            <div class="gliphs">◊ ϟ ᚾ ᛃ ᛉ</div>
+            <a href="skulda-bilingual.html" class="back-link" data-key="backLink">← Return to the Limiar</a>
+        </div>
+    </section>
+
+    <div class="footer-rune">ᛋ ᚲ ᚢ ᛚ ᛞ ᚨ</div>
+
+    <script>
+        const dictionary = {
+            en: {
+                title:    "Your path is secured.",
+                body:     "Your vector has been carved into the primary waitlist. An arcane confirmation thread is tracing its way to your inbox right now. The silence is about to break.",
+                backLink: "← Return to the Limiar"
+            },
+            pt: {
+                title:    "Seu e-mail foi gravado.",
+                body:     "O seu vetor de destino foi registrado na lista de espera principal. Um e-mail de confirmação mística está a caminho da sua caixa de entrada. O silêncio está prestes a se romper.",
+                backLink: "← Voltar ao Limiar"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lang = localStorage.getItem('skulda_lang') || 'en';
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (dictionary[lang][key]) el.textContent = dictionary[lang][key];
+            });
+        });
+    </script>
+</body>
+</html>
