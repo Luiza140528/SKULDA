@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SKULDA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --void:   #050508;
+      --surface:#090810;
+      --text:   #E0E0E0;
+      --muted:  #8A94A6;
+      --dim:    #38324e;
+      --purple: #7c3aed;
+      --purple-h:#6d28d9;
+      --cyan:   #00f3ff;
+      --border: rgba(138,148,166,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--void);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px;
+      z-index: 1000;
+      background: linear-gradient(to bottom, rgba(5,5,8,0.96), transparent);
+      backdrop-filter: blur(6px);
+      height: 64px;
+    }
+
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 11px;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0.15em;
+      transition: color 0.3s;
+    }
+    header a:hover { color: #fff; }
+
+    .lang-toggle {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .lang-toggle button {
+      color: var(--muted);
+      font-size: 11px;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0.15em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .lang-toggle button.active {
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.4);
+    }
+    .lang-sep {
+      color: rgba(138,148,166,0.3);
+      font-size: 10px;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 120px 24px;
+    }
+
+    .marker {
+      color: var(--cyan);
+      font-size: 14px;
+      margin-bottom: 24px;
+      text-shadow: 0 0 10px rgba(0,243,255,0.5);
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── HERO ── */
+    #hero { padding-top: 160px; min-height: 100vh; }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 8vw, 72px);
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 0.32em;
+      text-indent: 0.32em;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .brand-slogan {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .main-statement {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(18px, 3vw, 26px);
+      color: var(--text);
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.55;
+      margin-bottom: 44px;
+    }
+
+    /* Form */
+    .waitlist-form {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .waitlist-input {
+      width: 100%;
+      background: rgba(15,12,28,0.5);
+      border: 1px solid var(--border);
+      padding: 15px 18px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .waitlist-input:focus { border-color: var(--cyan); }
+    .waitlist-input::placeholder { color: #7F8A9E; }
+
+    .waitlist-btn {
+      width: 100%;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      text-transform: uppercase;
+    }
+    .waitlist-btn:hover { background: var(--purple-h); transform: translateY(-1px); }
+
+    .form-disclaimer {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      max-width: 300px;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
+    }
+
+    /* Divider */
+    .section-divider {
+      width: 100%;
+      height: 0.5px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    /* ── MANIFESTO ── */
+    #manifesto {
+      background: linear-gradient(to bottom, var(--void), var(--surface), var(--void));
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 520px;
+      text-align: center;
+      line-height: 1.85;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── FAQ ── */
+    #faq {
+      padding-top: 120px;
+      padding-bottom: 120px;
+      align-items: center;
+    }
+
+    .accordion-container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      width: 100%;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      text-align: left;
+      cursor: pointer;
+      transition: color 0.2s;
+      gap: 16px;
+    }
+    .accordion-header:hover { color: var(--cyan); }
+
+    .accordion-icon {
+      color: var(--cyan);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 18px;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+      padding-right: 28px;
+      padding-bottom: 0;
+    }
+
+    .accordion-item.active .accordion-icon { transform: rotate(45deg); }
+    .accordion-item.active .accordion-content {
+      max-height: 320px;
+      padding-bottom: 20px;
+    }
+
+    /* ── CTA FINAL ── */
+    #cta-final {
+      min-height: 60vh;
+      background: linear-gradient(to bottom, var(--void), var(--surface), var(--void));
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--muted);
+    }
+
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--dim);
+      text-decoration: none;
+      font-family: 'Share Tech Mono', monospace;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--muted); }
+
+    .footer-rune {
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 12px;
+      color: rgba(255,255,255,0.03);
+      margin-top: 20px;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-msg {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--cyan);
+      text-align: center;
+      letter-spacing: 0.04em;
+      margin-top: 8px;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <a href="skulda-privacy.html" data-key="navPrivacy">PRIVACIDADE</a>
+    <div class="lang-toggle">
+      <button id="btn-en" onclick="setLanguage('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button id="btn-pt" onclick="setLanguage('pt')" class="active">PT</button>
+    </div>
+    <a href="mailto:hello@skulda.com.br">hello@skulda.com.br</a>
+  </header>
+
+  <!-- ◈ HERO -->
+  <section id="hero">
+    <h1 class="brand-title">SKULDA</h1>
+    <div class="brand-slogan" data-key="brandSlogan">O destino não está escrito. Está na pedra.</div>
+
+    <p class="main-statement" data-key="heroStatement">
+      Entre na Skulda e explore os destinos que poderiam ter sido seus — cada escolha abre uma nova linha da sua história.
+    </p>
+
+    <form class="waitlist-form" onsubmit="handleSubmit(event)">
+      <input type="email" class="waitlist-input" id="email-field" placeholder="seu@email.com" required/>
+      <button type="submit" class="waitlist-btn" data-key="heroBtn">ENTRAR NA LISTA</button>
+    </form>
+    <p class="form-disclaimer" data-key="heroDisclaimer">
+      Acesso antecipado. Sem spam. Cancelamento a qualquer momento.
+    </p>
+    <p class="success-msg" id="success-hero" data-key="successMsg">
+      Seu destino foi gravado na pedra. ✦
+    </p>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ◈ MANIFESTO -->
+  <section id="manifesto">
+    <div class="marker reveal">◈</div>
+    <h2 class="section-title reveal" data-key="manifestoTitle">
+      Uma jornada por destinos que ainda não aconteceram.
+    </h2>
+    <p class="section-body reveal" data-key="manifestoBody">
+      Skulda é uma experiência narrativa de destinos alternativos — feita para quem nunca parou de pensar no "e se?". Você entra em versões diferentes da sua história e vê como tudo muda quando as escolhas mudam.
+    </p>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ◈ FAQ -->
+  <section id="faq">
+    <div class="marker reveal">◈</div>
+    <h2 class="section-title reveal" data-key="faqTitle">Perguntas Frequentes</h2>
+
+    <div class="accordion-container reveal">
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span data-key="faq1q">O que é a Skulda?</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <span data-key="faq1a">É uma plataforma de entretenimento baseada em inteligência artificial onde você pode viver vidas e linhas do tempo inteiramente alternativas a partir das suas decisões.</span>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span data-key="faq2q">É um jogo?</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <span data-key="faq2a">Sim, um RPG textual de simulação avançada e de alta fidelidade técnica, focado em escolhas, gerenciamento de atributos e consequências profundas.</span>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span data-key="faq3q">Posso explorar mais de uma vez?</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <span data-key="faq3a">Com certeza. Cada nova linha do tempo reinicia o motor da IA, ramificando destinos completamente diferentes a cada tentativa até a idade 80.</span>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span data-key="faq4q">O que preciso fazer para entrar?</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <span data-key="faq4a">Basta cadastrar o seu e-mail de uso principal na nossa lista de espera acima para receber o link de acesso exclusivo assim que o primeiro servidor for aberto.</span>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span data-key="faq5q">Quando vai lançar?</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <span data-key="faq5a">O pipeline do motor está na reta final de engenharia na Vercel e OpenAI. Os membros da waitlist receberão os primeiros convites de forma escalonada nas próximas semanas.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ◈ CTA FINAL -->
+  <section id="cta-final">
+    <div class="marker reveal">◈</div>
+    <h2 class="section-title reveal" data-key="ctaTitle">O seu destino começa aqui.</h2>
+    <p class="section-body reveal" style="margin-bottom: 36px;" data-key="ctaBody">
+      Entre na lista e seja uma das primeiras pessoas a explorar a Skulda.
+    </p>
+
+    <form class="waitlist-form reveal" onsubmit="handleSubmit(event)" style="max-width: 340px;">
+      <input type="email" class="waitlist-input" id="email-field-2" placeholder="seu@email.com" required/>
+      <button type="submit" class="waitlist-btn" data-key="heroBtn">ENTRAR NA LISTA</button>
+    </form>
+    <p class="form-disclaimer reveal" data-key="heroDisclaimer" style="margin-top: 10px;">
+      Acesso antecipado. Sem spam. Cancelamento a qualquer momento.
+    </p>
+    <p class="success-msg" id="success-cta" data-key="successMsg" style="margin-top: 10px;">
+      Seu destino foi gravado na pedra. ✦
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">SKULDA</span>
+    <nav class="footer-links">
+      <a href="skulda-privacy.html" data-key="navPrivacy">PRIVACIDADE</a>
+      <a href="mailto:hello@skulda.com.br">hello@skulda.com.br</a>
+    </nav>
+    <div class="footer-rune">ᛋ ᚲ ᚢ ᛚ ᛞ ᚨ</div>
+  </footer>
+
+  <script>
+    // ════════════════════════════════════════
+    // DICTIONARY
+    // ════════════════════════════════════════
+    const dictionary = {
+      pt: {
+        navPrivacy:       'PRIVACIDADE',
+        brandSlogan:      'O destino não está escrito. Está na pedra.',
+        heroStatement:    'Entre na Skulda e explore os destinos que poderiam ter sido seus — cada escolha abre uma nova linha da sua história.',
+        heroBtn:          'ENTRAR NA LISTA',
+        heroDisclaimer:   'Acesso antecipado. Sem spam. Cancelamento a qualquer momento.',
+        successMsg:       'Seu destino foi gravado na pedra. ✦',
+        manifestoTitle:   'Uma jornada por destinos que ainda não aconteceram.',
+        manifestoBody:    'Skulda é uma experiência narrativa de destinos alternativos — feita para quem nunca parou de pensar no "e se?". Você entra em versões diferentes da sua história e vê como tudo muda quando as escolhas mudam.',
+        faqTitle:         'Perguntas Frequentes',
+        faq1q:            'O que é a Skulda?',
+        faq1a:            'É uma plataforma de entretenimento baseada em inteligência artificial onde você pode viver vidas e linhas do tempo inteiramente alternativas a partir das suas decisões.',
+        faq2q:            'É um jogo?',
+        faq2a:            'Sim, um RPG textual de simulação avançada e de alta fidelidade técnica, focado em escolhas, gerenciamento de atributos e consequências profundas.',
+        faq3q:            'Posso explorar mais de uma vez?',
+        faq3a:            'Com certeza. Cada nova linha do tempo reinicia o motor da IA, ramificando destinos completamente diferentes a cada tentativa até a idade 80.',
+        faq4q:            'O que preciso fazer para entrar?',
+        faq4a:            'Basta cadastrar o seu e-mail de uso principal na nossa lista de espera acima para receber o link de acesso exclusivo assim que o primeiro servidor for aberto.',
+        faq5q:            'Quando vai lançar?',
+        faq5a:            'O pipeline do motor está na reta final de engenharia na Vercel e OpenAI. Os membros da waitlist receberão os primeiros convites de forma escalonada nas próximas semanas.',
+        ctaTitle:         'O seu destino começa aqui.',
+        ctaBody:          'Entre na lista e seja uma das primeiras pessoas a explorar a Skulda.',
+        placeholder:      'seu@email.com',
+      },
+      en: {
+        navPrivacy:       'PRIVACY',
+        brandSlogan:      'The destiny is not written. It is carved.',
+        heroStatement:    'Enter Skulda and explore the destinies that could have been yours — every choice opens a new line of your story.',
+        heroBtn:          'JOIN THE WAITLIST',
+        heroDisclaimer:   'Early access. No spam. Cancel anytime.',
+        successMsg:       'Your destiny has been carved into the stone. ✦',
+        manifestoTitle:   'A journey through destinies that have not happened yet.',
+        manifestoBody:    'Skulda is a narrative experience of alternate destinies — built for those who never stopped asking "what if?". You enter different versions of your story and watch how everything changes when choices change.',
+        faqTitle:         'Frequently Asked Questions',
+        faq1q:            'What is Skulda?',
+        faq1a:            'An AI-powered entertainment platform where you can live entirely alternative lives and timelines based on your decisions.',
+        faq2q:            'Is it a game?',
+        faq2a:            'Yes — a high-fidelity textual RPG focused on choices, attribute management and deep consequences.',
+        faq3q:            'Can I explore more than once?',
+        faq3a:            'Absolutely. Each new timeline resets the AI engine, branching into completely different destinies every attempt until age 80.',
+        faq4q:            'What do I need to do to get in?',
+        faq4a:            'Simply register your email on our waitlist above to receive your exclusive access link as soon as the first server opens.',
+        faq5q:            'When does it launch?',
+        faq5a:            'The engine pipeline is in its final engineering phase on Vercel and OpenAI. Waitlist members will receive invites in a staggered rollout over the coming weeks.',
+        ctaTitle:         'Your destiny starts here.',
+        ctaBody:          'Join the list and be among the first to explore Skulda.',
+        placeholder:      'your@email.com',
+      },
+    };
+
+    // ════════════════════════════════════════
+    // LANGUAGE TOGGLE
+    // ════════════════════════════════════════
+    function setLanguage(lang) {
+      localStorage.setItem('skulda_lang', lang);
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (dictionary[lang][key]) el.textContent = dictionary[lang][key];
+      });
+      document.getElementById('email-field').placeholder = dictionary[lang].placeholder;
+      document.getElementById('email-field-2').placeholder = dictionary[lang].placeholder;
+    }
+
+    // ════════════════════════════════════════
+    // FAQ ACCORDION — bug-free
+    // ════════════════════════════════════════
+    function toggleAccordion(btn) {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    }
+
+    // ════════════════════════════════════════
+    // FORM SUBMIT
+    // ════════════════════════════════════════
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const emailId = form.querySelector('input[type="email"]').id;
+      const successId = emailId === 'email-field' ? 'success-hero' : 'success-cta';
+      form.querySelectorAll('input, button').forEach(el => el.style.display = 'none');
+      const disc = form.nextElementSibling;
+      if (disc && disc.classList.contains('form-disclaimer')) disc.style.display = 'none';
+      document.getElementById(successId).style.display = 'block';
+    }
+
+    // ════════════════════════════════════════
+    // SCROLL REVEAL
+    // ════════════════════════════════════════
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ════════════════════════════════════════
+    // INIT
+    // ════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', () => {
+      const lang = localStorage.getItem('skulda_lang') || 'en';
+      setLanguage(lang);
+    });
+  </script>
+
+</body>
+</html>
