@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Skulda — Privacidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@100;200;300&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --void:    #050508;
+  --surface: #0c0a13;
+  --surface2:#0e0c18;
+  --text:    #ece8f8;
+  --purple:  #8B5CF6;
+  --cyan:    #55D6FF;
+  --border2: rgba(255,255,255,0.04);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 28px;
+  width: 100%;
+  height: 60px;
+  background: rgba(5,5,8,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border2);
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-icon { width: 16px; height: 16px; flex-shrink: 0; }
+.nav-logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  color: var(--text);
+}
+.nav-link {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #8A94A6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text); }
+
+/* PAGE */
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 120px 28px 100px;
+}
+
+/* Header */
+.page-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+  opacity: 0.8;
+}
+
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.page-date {
+  font-size: 11px;
+  color: #8A94A6;
+  letter-spacing: 0.12em;
+  margin-bottom: 52px;
+  display: block;
+}
+
+/* Divider */
+.divider {
+  height: 0.5px;
+  background: var(--border2);
+  margin-bottom: 52px;
+}
+
+/* Sections */
+.policy-section {
+  margin-bottom: 48px;
+}
+
+.policy-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.policy-section-title::before {
+  content: '◈  ';
+  color: var(--cyan);
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.policy-p {
+  font-size: 14px;
+  color: #8A94A6;
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+
+.policy-p:last-child { margin-bottom: 0; }
+
+/* List */
+.policy-list {
+  list-style: none;
+  margin: 12px 0 14px;
+  padding: 0;
+}
+
+.policy-list li {
+  font-size: 14px;
+  color: #8A94A6;
+  line-height: 1.85;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.policy-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  opacity: 0.4;
+  font-size: 12px;
+}
+
+/* Contact highlight */
+.contact-link {
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+.contact-link:hover { opacity: 0.7; }
+
+/* Footer */
+footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 0.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  color: #8A94A6;
+}
+
+.footer-back {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #8A94A6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-back:hover { color: var(--text); }
+
+.footer-rune {
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 12px;
+  color: rgba(255,255,255,0.04);
+  margin-top: 24px;
+}
+</style>
+<style>
+/* ══ SKULDA PRIVACY — SOVEREIGN CONTRAST ══ */
+.policy-p,
+.policy-list li,
+.page-date,
+.footer-logo,
+.footer-back,
+.nav-link {
+  color: #8A94A6 !important;
+  opacity: 1 !important;
+}
+
+.page-title,
+.policy-section-title {
+  color: #ece8f8 !important;
+  opacity: 1 !important;
+}
+
+.page-eyebrow,
+.policy-section-title::before,
+.contact-link {
+  color: #55D6FF !important;
+  opacity: 1 !important;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="skulda-landing.html" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none">
+      <defs><filter id="nf"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <polygon points="18,2 34,18 18,34 2,18" fill="#0e0c18" stroke="#2e2840" stroke-width="0.8"/>
+      <polygon points="18,10 26,18 18,26 10,18" fill="none" stroke="#1e1a2c" stroke-width="0.5"/>
+      <line x1="18" y1="3" x2="18" y2="33" stroke="#55D6FF" stroke-width="0.8" opacity="0.7" filter="url(#nf)"/>
+      <line x1="18" y1="5" x2="18" y2="31" stroke="#fff" stroke-width="0.3" opacity="0.6"/>
+    </svg>
+    <span class="nav-logo-text">SKULDA</span>
+  </a>
+  <a href="skulda-landing.html" class="nav-link">← Voltar</a>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <span class="page-eyebrow">Política de Privacidade</span>
+  <h1 class="page-title">Privacidade</h1>
+  <span class="page-date">Última atualização: Junho de 2026</span>
+
+  <div class="divider"></div>
+
+  <!-- Intro -->
+  <div class="policy-section">
+    <p class="policy-p">
+      A Skulda respeita sua privacidade. Esta página explica quais dados coletamos, por que coletamos e como usamos essas informações.
+    </p>
+  </div>
+
+  <!-- Dados coletados -->
+  <div class="policy-section">
+    <h2 class="policy-section-title">Informações que coletamos</h2>
+    <p class="policy-p">Quando você entra na waitlist, podemos coletar:</p>
+    <ul class="policy-list">
+      <li>Email — obrigatório para envio de atualizações.</li>
+      <li>Nome — apenas se você decidir informar.</li>
+      <li>Informações enviadas por formulários.</li>
+      <li>Dados técnicos básicos de navegação, como dispositivo e navegador, se ferramentas de análise estiverem ativas.</li>
+    </ul>
+  </div>
+
+  <!-- Como usamos -->
+  <div class="policy-section">
+    <h2 class="policy-section-title">Como usamos seus dados</h2>
+    <p class="policy-p">Usamos essas informações para:</p>
+    <ul class="policy-list">
+      <li>Adicionar você à waitlist.</li>
+      <li>Enviar atualizações sobre a Skulda.</li>
+      <li>Responder mensagens enviadas por você.</li>
+      <li>Entender melhor o interesse na experiência.</li>
+      <li>Melhorar a página e a comunicação.</li>
+    </ul>
+  </div>
+
+  <!-- Compartilhamento -->
+  <div class="policy-section">
+    <h2 class="policy-section-title">Compartilhamento de dados</h2>
+    <p class="policy-p">
+      Não vendemos seus dados. Podemos compartilhar informações apenas com ferramentas necessárias para operar o site — como hospedagem, formulários e análises — quando aplicável.
+    </p>
+  </div>
+
+  <!-- Armazenamento -->
+  <div class="policy-section">
+    <h2 class="policy-section-title">Armazenamento</h2>
+    <p class="policy-p">Mantemos seus dados somente pelo tempo necessário para:</p>
+    <ul class="policy-list">
+      <li>Administrar a waitlist.</li>
+      <li>Cumprir obrigações legais.</li>
+      <li>Manter contato sobre a Skulda enquanto fizer sentido.</li>
+    </ul>
+  </div>
+
+  <!-- Seus direitos -->
+  <div class="policy-section">
+    <h2 class="policy-section-title">Seus direitos</h2>
+    <p class="policy-p">Você pode solicitar a qualquer momento:</p>
+    <ul class="policy-list">
+      <li>Acesso aos seus dados.</li>
+      <li>Correção de informações.</li>
+      <li>Exclusão dos seus dados.</li>
+      <li>Remoção da waitlist.</li>
+      <li>Cancelamento de comunicações futuras.</li>
+    </ul>
+  </div>
+
+  <!-- Contato -->
+  <div class="policy-section">
+    <h2 class="policy-section-title">Contato</h2>
+    <p class="policy-p">
+      Para exercer seus direitos ou tirar dúvidas sobre privacidade, entre em contato:<br>
+      <a href="mailto:hello@skulda.com.br" class="contact-link">hello@skulda.com.br</a>
+    </p>
+  </div>
+
+  <!-- Atualizações -->
+  <div class="policy-section">
+    <h2 class="policy-section-title">Atualizações</h2>
+    <p class="policy-p">
+      Podemos atualizar esta política quando necessário. A versão mais recente sempre estará disponível nesta página.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-logo">SKULDA</span>
+    <a href="skulda-landing.html" class="footer-back">← Voltar ao início</a>
+    <div class="footer-rune">ᛋ ᚲ ᚢ ᛚ ᛞ ᚨ</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
